@@ -1,3 +1,6 @@
+image:
+  name: "node:latest"
+
 stages:          # List of stages for jobs, and their order of execution
   - security-scan
   - mobb-autofix
