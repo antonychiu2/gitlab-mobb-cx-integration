@@ -3,5 +3,5 @@
 
 {
 	"HostName": "<%=request.getParameter("HostName")%>",
-	"HostStatus": "OK"
+	"HostStatus": "OK" 
 }
