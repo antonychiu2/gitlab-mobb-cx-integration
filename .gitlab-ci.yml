@@ -25,7 +25,7 @@ security-scan-job:       # This job runs in the build stage, which runs first.
   tags:
     - desktop
   script:
-    - set
+    - dir env:
     #- npx snyk code test --json-file-output=report.json
 
 mobb-autofix-job:   # This job runs in the test stage.
