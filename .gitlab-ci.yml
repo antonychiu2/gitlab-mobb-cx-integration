@@ -15,6 +15,7 @@ security-scan-job:       # This job runs in the build stage, which runs first.
     - desktop
   script: |
     dir env:
+    npm i snyk
     npx snyk auth $SNYK_TOKEN
     npx snyk code test --json-file-output=report.json
 
@@ -24,5 +25,6 @@ mobb-autofix-job:   # This job only starts when the job in the scan stage fails 
     - desktop
   script:
     - echo "Running Mobb Autofixer"
+    - npm i mobbdev
     - npx mobbdev analyze -f report.json -r $CI_PROJECT_URL --ref main
   when: on_failure #this only runs if the scan fails (vulnerability found)
