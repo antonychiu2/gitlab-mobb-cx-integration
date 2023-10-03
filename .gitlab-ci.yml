@@ -33,6 +33,6 @@ mobb-autofix-job:   # This job only starts when the job in the scan stage fails 
     - saas-linux-medium-amd64
   script:
     - echo "Running Mobb Autofixer"
-    - npm i mobbdev
+    #- npm i mobbdev
     - npx mobbdev analyze -f report.json -r $CI_PROJECT_URL --ref main --api-key $MOBB_TOKEN
   when: on_failure #this only runs if the scan fails (vulnerability found)
