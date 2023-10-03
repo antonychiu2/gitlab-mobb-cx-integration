@@ -1,5 +1,5 @@
-image:
-  name: "node:latest"
+#image:
+#  name: "node:latest"
 
 stages:          # List of stages for jobs, and their order of execution
   - security-scan
@@ -15,10 +15,9 @@ workflow:
 security-scan-job:       # This job runs in the build stage, which runs first.
   stage: security-scan
   tags:
-    - saas-linux-medium-amd64
+    - desktop
   script: |
     #dir env:
-    dir
     npm i snyk
     npx snyk auth $SNYK_TOKEN
     npx snyk code test --json-file-output=report.json
@@ -26,7 +25,7 @@ security-scan-job:       # This job runs in the build stage, which runs first.
 mobb-autofix-job:   # This job only starts when the job in the scan stage fails (vulnerability has been found).
   stage: mobb-autofix
   tags:
-    - saas-linux-medium-amd64
+    - desktop
   script:
     - echo "Running Mobb Autofixer"
     - npm i mobbdev
