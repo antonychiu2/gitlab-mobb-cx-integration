@@ -2,6 +2,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 
 {
-	"HostName": "<%=HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(request.getParameter("HostName")))%>",
+	"HostName": "<%=request.getParameter("HostName")%>",
 	"HostStatus": "OK"
 }
