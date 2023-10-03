@@ -18,6 +18,7 @@ security-scan-job:       # This job runs in the build stage, which runs first.
     - saas-linux-medium-amd64
   script: |
     #dir env:
+    dir
     npm i snyk
     npx snyk auth $SNYK_TOKEN
     npx snyk code test --json-file-output=report.json
