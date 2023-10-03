@@ -20,6 +20,7 @@ security-scan-job:       # This job runs in the build stage, which runs first.
   script: |
     #dir env:
     #dir
+    env
     ls
     #npm i snyk
     npx snyk auth $SNYK_TOKEN
