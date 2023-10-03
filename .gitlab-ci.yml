@@ -22,6 +22,6 @@ mobb-autofix-job:   # This job only starts when the job in the scan stage fails 
   tags:
     - desktop
   script:
-    - echo "Running Mobb Autofix."
+    - echo "Running Mobb Autofixer"
     - npx mobbdev analyze -f report.json -r $CI_PROJECT_URL --ref main
   when: on_failure #this only runs if the scan fails (vulnerability found)
