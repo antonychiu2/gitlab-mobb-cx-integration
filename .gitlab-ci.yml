@@ -36,4 +36,4 @@ mobb-autofix-job:   # This job only starts when the job in the scan stage fails 
     #- ls -l
     - echo "Running Mobb Autofixer"
     - npx mobbdev analyze -f report.json -r $CI_PROJECT_URL --ref $CI_COMMIT_REF_NAME --api-key $MOBB_TOKEN
-  when: on_failure #this only runs if the scan fails (vulnerability found)
+  when: on_failure # This only runs if the scan fails (vulnerability found)
