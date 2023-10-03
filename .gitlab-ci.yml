@@ -20,9 +20,11 @@ security-scan-job:       # This job runs in the security-scan stage, which runs 
   tags:
     #- desktop
     - saas-linux-medium-amd64
-  script: |
-    npx snyk auth $SNYK_TOKEN
-    npx snyk code test --json-file-output=report.json
+  script: 
+    - env
+    - ls -l
+    - npx snyk auth $SNYK_TOKEN
+    - npx snyk code test --json-file-output=report.json
 
 mobb-autofix-job:   # This job only starts when the job in the scan stage fails (vulnerability has been found).
   stage: mobb-autofix
@@ -30,6 +32,8 @@ mobb-autofix-job:   # This job only starts when the job in the scan stage fails 
     #- desktop
     - saas-linux-medium-amd64
   script:
+    - env
+    - ls -l
     - echo "Running Mobb Autofixer"
     - npx mobbdev analyze -f report.json -r $CI_PROJECT_URL --ref main --api-key $MOBB_TOKEN
   when: on_failure #this only runs if the scan fails (vulnerability found)
