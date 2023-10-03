@@ -1,3 +1,7 @@
+# Introduction
+# This pipeline is designed to run during merge_requests to verify if the code contains any vulnerability.
+# If vulnerability is found, the pipeline will fail, thus notifying developement team of pending issues that requires addressing
+
 image:
   name: "node:latest"
 
@@ -5,24 +9,18 @@ stages:          # List of stages for jobs, and their order of execution
   - security-scan
   - mobb-autofix
 
-workflow:
+workflow:         # This pipeline will only trigger during merge_requests and commits top the default branch (main)
   rules:
     - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
     - if: $CI_COMMIT_TAG
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
-
-security-scan-job:       # This job runs in the build stage, which runs first.
+security-scan-job:       # This job runs in the security-scan stage, which runs first.
   stage: security-scan
   tags:
     #- desktop
     - saas-linux-medium-amd64
   script: |
-    #dir env:
-    #dir
-    env
-    ls -l
-    #npm i snyk
     npx snyk auth $SNYK_TOKEN
     npx snyk code test --json-file-output=report.json
 
@@ -33,6 +31,5 @@ mobb-autofix-job:   # This job only starts when the job in the scan stage fails 
     - saas-linux-medium-amd64
   script:
     - echo "Running Mobb Autofixer"
-    #- npm i mobbdev
     - npx mobbdev analyze -f report.json -r $CI_PROJECT_URL --ref main --api-key $MOBB_TOKEN
   when: on_failure #this only runs if the scan fails (vulnerability found)
