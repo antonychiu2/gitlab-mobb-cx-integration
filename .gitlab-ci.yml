@@ -12,9 +12,9 @@ workflow:
 security-scan-job:       # This job runs in the build stage, which runs first.
   stage: security-scan
   tags:
-    - desktop
+    - saas-linux-medium-amd64
   script: |
-    dir env:
+    #dir env:
     npm i snyk
     npx snyk auth $SNYK_TOKEN
     npx snyk code test --json-file-output=report.json
@@ -22,7 +22,7 @@ security-scan-job:       # This job runs in the build stage, which runs first.
 mobb-autofix-job:   # This job only starts when the job in the scan stage fails (vulnerability has been found).
   stage: mobb-autofix
   tags:
-    - desktop
+    - saas-linux-medium-amd64
   script:
     - echo "Running Mobb Autofixer"
     - npm i mobbdev
