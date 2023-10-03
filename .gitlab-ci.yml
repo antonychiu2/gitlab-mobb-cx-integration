@@ -17,17 +17,16 @@
 # https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Getting-Started.gitlab-ci.yml
 
 stages:          # List of stages for jobs, and their order of execution
-  - build
+  - security-scan
   - test
   - deploy
 
-build-job:       # This job runs in the build stage, which runs first.
-  stage: build
+security-scan-job:       # This job runs in the build stage, which runs first.
+  stage: security-scan
   tags:
     - desktop
   script:
-    - echo "Compiling the code..."
-    - echo "Compile complete."
+    - npx synk code test --json-file-output=report.json
 
 unit-test-job:   # This job runs in the test stage.
   stage: test    # It only starts when the job in the build stage completes successfully.
