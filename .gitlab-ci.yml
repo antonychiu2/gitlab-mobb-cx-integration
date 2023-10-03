@@ -12,8 +12,8 @@ stages:          # List of stages for jobs, and their order of execution
 workflow:         # This pipeline will only trigger during merge_requests and commits top the default branch (main)
   rules:
     - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
-    - if: $CI_COMMIT_TAG
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    #- if: $CI_COMMIT_TAG
+    #- if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
 security-scan-job:       # This job runs in the security-scan stage, which runs first.
   stage: security-scan
