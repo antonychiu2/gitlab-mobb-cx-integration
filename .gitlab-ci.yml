@@ -7,7 +7,6 @@ image:
 
 stages:          # List of stages for jobs, and their order of execution
   - security-scan
-  - mobb-autofix
 
 workflow:         # This pipeline will only trigger during merge_requests and commits top the default branch (main)
   rules:
@@ -25,15 +24,3 @@ security-scan-job:       # This job runs in the security-scan stage, which runs 
     #- ls -l
     - npx snyk auth $SNYK_TOKEN
     - npx snyk code test --json-file-output=report.json
-
-mobb-autofix-job:   # This job only starts when the job in the scan stage fails (vulnerability has been found).
-  stage: mobb-autofix
-  tags:
-    #- desktop
-    - saas-linux-medium-amd64
-  script:
-    #- env
-    #- ls -l
-    - echo "Running Mobb Autofixer"
-    - npx mobbdev analyze -f report.json -r $CI_PROJECT_URL --ref $CI_COMMIT_REF_NAME --api-key $MOBB_TOKEN
-  when: on_failure # This only runs if the scan fails (vulnerability found)
