@@ -23,7 +23,7 @@ checkmarx-sast-scan-job:
     - ./cx configure set --prop-name cx_base_auth_uri --prop-value $CX_BASE_AUTH_URI
     - ./cx configure set --prop-name cx_base_uri --prop-value $CX_BASE_URI
     - ./cx configure set --prop-name cx_tenant --prop-value $CX_TENANT
-    - ./cx scan create --project-name $CX_PROJECT_NAME -s ./ --report-format json --scan-types sast --branch nobranch  --threshold "sast-high=1"
+    - ./cx scan create --project-name "My-Sample-Project" -s ./ --report-format json --scan-types sast --branch nobranch  --threshold "sast-high=1"
   artifacts:
     paths:
     - "*.json"
