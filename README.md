@@ -76,7 +76,7 @@ mobb-autofixer-job:
 This sample pipeline is configured to run on every merge_request events, or it can also be triggered manually by the user. 
 To trigger this pipeline manually, go to Pipeline -> Run Pipline.
 
-![Run Pipeline](/source/images/MobbPipeline_RunPipeline "Run Pipeline"){width=60%}
+![Run Pipeline](/source/images/MobbPipeline_RunPipeline.png "Run Pipeline"){width=60%}
 
 ## View Mobb Analysis for auto-fix options
 
