@@ -5,6 +5,7 @@ This is a sample integration that demonstrates the ease of use of the Mobb CLI (
 ## Pre-Requisite
 - Sign up a free account at https://mobb.ai
 - Generate an API token
+
 ![Generate Mobb API Key](/source/images/MobbGenerateAPI.gif "Generate Mobb API Key")
 
 
