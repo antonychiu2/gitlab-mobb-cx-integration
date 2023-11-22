@@ -85,6 +85,7 @@ After the scan is complete, Mobb will run an analysis to identify auto-fix optio
 ![Gitlab Pipeline - Mobb Stage Passed](/source/images/MobbPipeline_Passed.png "Gitlab Pipeline - Mobb Stage Passed"){width=60%}
 
 Click on the Mobb URL to visit the analysis page. 
+
 ![Gitlab Pipeline - Mobb URL](/source/images/MobbPipeline_URL.png "Gitlab Pipeline - Mobb URL"){width=60%}
 
 Once we arrive at the analysis page for the project, we can see a list of available fixes. Let's click on the "Link to Fix" button next to the XSS finding. 
