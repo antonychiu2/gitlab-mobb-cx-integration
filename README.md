@@ -9,7 +9,7 @@ To replicate this sample integration in your own Gitlab Pipeline:
 - Generate an API token and store it in a safe place
 - An existing Checkmarx (CxOne) subscription
 
-![image](/source/images/MobbGenerateAPI.gif "Generate Mobb API Key"){width=10%}
+![image](/source/images/MobbGenerateAPI.gif "Generate Mobb API Key"){width=40%}
 
 
 
