@@ -71,5 +71,31 @@ mobb-autofixer-job:
     - npx mobbdev@latest analyze -f cx_result.json -r $CI_PROJECT_URL --ref $CI_COMMIT_REF_NAME --api-key $MOBB_API_KEY
   when: on_failure # Run Mobb only if there's a finding to fix
 ```
+## Running the Scan and Mob Analysis
 
+This sample pipeline is configured to run on every merge_request events, or it can also be triggered manually by the user. 
+To trigger this pipeline manually, go to Pipeline -> Run Pipline.
+
+![Run Pipeline](/source/images/MobbPipeline_RunPipeline "Run Pipeline"){width=60%}
+
+## View Mobb Analysis for auto-fix options
+
+After the scan is complete, Mobb will run an analysis to identify auto-fix options. The quickest way to access the analysis is through the URL from the Mobb pipeline step. To get there, let's go to Build -> Jobs, then click on the "Passed" icon next to the `Mobb-autofixer-job` stage. 
+
+![Gitlab Pipeline - Mobb Stage Passed](/source/images/MobbPipeline_Passed.png "Gitlab Pipeline - Mobb Stage Passed"){width=60%}
+
+Click on the Mobb URL to visit the analysis page. 
+![Gitlab Pipeline - Mobb URL](/source/images/MobbPipeline_URL.png "Gitlab Pipeline - Mobb URL"){width=60%}
+
+Once we arrive at the analysis page for the project, we can see a list of available fixes. Let's click on the "Link to Fix" button next to the XSS finding. 
+
+![Mobb - Project Page](/source/images/Mobb_ProjectPage.png "Mobb - Project Page"){width=60%}
+
+Mobb provides a powerful self-guided remediation process. As a developer, all you have to do is answer a few questions and validate the fix. From there, Mobb will take over the remediation process and commit the code on your behalf. Once you're ready, select the "Commit Changes" button. 
+
+![Mobb - Commit Fix](/source/images/Mobbmmit_CommitFix.png "Mobb - Commit Fix"){width=60%}
+
+Last the last step, enter the name of the target branch where this merge request will be merged. And select "Commit Changes". 
+
+![Mobb - Commit Changes](/source/images/Mobbmmit_CommitChanges.png "Mobb - Commit Changes"){width=60%}
 
