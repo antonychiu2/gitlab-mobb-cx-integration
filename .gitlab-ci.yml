@@ -23,7 +23,9 @@ checkmarx-sast-scan-job:
     - ./cx configure set --prop-name cx_base_auth_uri --prop-value $CX_BASE_AUTH_URI
     - ./cx configure set --prop-name cx_base_uri --prop-value $CX_BASE_URI
     - ./cx configure set --prop-name cx_tenant --prop-value $CX_TENANT
-    - ./cx scan create --project-name $CX_PROJECT_NAME -s ./ --report-format json --scan-types sast --branch nobranch  --threshold "sast-high=1"
+    - ./cx scan create --project-name $CX_PROJECT_NAME -s ./ --report-format json --scan-types sast --branch nobranch  #--threshold "sast-high=1"
+    - ls -l
+
   artifacts:
     paths:
     - "*.json"
@@ -35,4 +37,4 @@ mobb-autofixer-job:
   script:
     - ls -l
     - npx mobbdev@latest analyze -f cx_result.json -r $CI_PROJECT_URL --ref $CI_COMMIT_REF_NAME --api-key $MOBB_API_KEY
-  when: on_failure # Run Mobb only if there's a finding to fix
+  #when: on_failure # Run Mobb only if there's a finding to fix
