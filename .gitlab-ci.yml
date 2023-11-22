@@ -27,6 +27,7 @@ checkmarx-sast-scan-job:
   artifacts:
     paths:
     - "*.json"
+    when: always
 
 mobb-autofixer-job:
   stage: mobb-autofixer
