@@ -30,6 +30,8 @@ mobb-autofixer-job:
   stage: mobb-autofixer
   tags:
     - saas-linux-medium-amd64
+  dependencies:
+    - checkmarx-sast-scan
   script:
     - ls -l
     - npx mobbdev@latest analyze -f cx_result.json -r $CI_PROJECT_URL --ref $CI_COMMIT_REF_NAME --api-key $MOBB_API_KEY
