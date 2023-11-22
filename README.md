@@ -7,9 +7,9 @@ This is a sample integration that demonstrates the ease of use of the Mobb CLI (
 To replicate this sample integration in your own Gitlab Pipeline:
 - Sign up a free account at https://mobb.ai
 - Generate an API token and store it in a safe place
+
+![image](/source/images/MobbGenerateAPI.gif "Generate Mobb API Key"){width=60%}
+
 - An existing Checkmarx (CxOne) subscription
-
-![image](/source/images/MobbGenerateAPI.gif "Generate Mobb API Key"){width=70%}
-
 
 
