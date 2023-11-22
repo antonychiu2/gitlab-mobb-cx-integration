@@ -23,7 +23,7 @@ From here, you can generate an API key by selecting the "Add API Key" button.
 
 Next, go to your Gitlab repository and select "Settings -> CI/CD -> Variables". From here, we can select "Add Variable". For the variable key, we will call it `MOBB_API_KEY`. For the Value, we will past the value of the token from the previous step. 
 
-![image](/source/images/GitlabAddVariable.gif "Gitlab Add Variable"){width=60%}
+![image](/source/images/Mobb_SaveVariableGitlab.gif.gif "Gitlab Add Variable"){width=60%}
 
 ## Configure Gitlab Pipeline
 
