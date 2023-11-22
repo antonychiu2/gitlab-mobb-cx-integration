@@ -24,3 +24,52 @@ From here, you can generate an API key by selecting the "Add API Key" button.
 Next, go to your Gitlab repository and select "Settings -> CI/CD -> Variables". From here, we can select "Add Variable". For the variable key, we will call it `MOBB_API_KEY`. For the Value, we will past the value of the token from the previous step. 
 
 ![image](/source/images/GitlabAddVariable.gif "Gitlab Add Variable"){width=60%}
+
+## Configure Gitlab Pipeline
+
+Let's now configure the Gitlab Pipeline. You can use the following sample YAML script, or customize it to your liking. 
+
+If you decide to this this exact YAML script, please ensure your Checkmarx related variables are well defined. Namely, 
+`CX_BASE_AUTH_URI`, `CX_API_KEY`, `CX_BASE_URI`, `CX_TENANT`. You can find the value to these variables by following this [guide](https://checkmarx.com/resource/documents/en/34965-118315-authentication-for-checkmarx-one-cli.html) on Checkmarx documentation page. 
+
+```yaml
+# This example utilizes Mobb with Checkmarx via GitLab CI/CD pipelines
+
+image:
+  name: "node:latest"
+
+stages:
+  - checkmarx-sast-scan
+  - mobb-autofixer
+
+workflow: # Run on every merge request
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+
+checkmarx-sast-scan-job:
+  stage: checkmarx-sast-scan
+  tags:
+    - saas-linux-medium-amd64
+  script:
+    - wget https://github.com/Checkmarx/ast-cli/releases/download/2.0.61/ast-cli_2.0.61_linux_x64.tar.gz -O checkmarx.tar.gz
+    - tar -xf checkmarx.tar.gz
+    - ./cx configure set --prop-name cx_apikey --prop-value $CX_API_KEY
+    - ./cx configure set --prop-name cx_base_auth_uri --prop-value $CX_BASE_AUTH_URI
+    - ./cx configure set --prop-name cx_base_uri --prop-value $CX_BASE_URI
+    - ./cx configure set --prop-name cx_tenant --prop-value $CX_TENANT
+    - ./cx scan create --project-name $CX_PROJECT_NAME -s ./ --report-format json --scan-types sast --branch nobranch  --threshold "sast-high=1"
+  artifacts:
+    paths:
+    - "*.json"
+    when: always
+
+mobb-autofixer-job:
+  stage: mobb-autofixer
+  tags:
+    - saas-linux-medium-amd64
+  script:
+    - npx mobbdev@latest analyze -f cx_result.json -r $CI_PROJECT_URL --ref $CI_COMMIT_REF_NAME --api-key $MOBB_API_KEY
+  when: on_failure # Run Mobb only if there's a finding to fix
+
+
+```
