@@ -14,14 +14,14 @@ To perform this integration, you will need the following:
 
 ## Setup 
 
-To setup this integration in your own Gitlab environment, you will need to first gen the Mobb API Token. 
+To setup this integration in your own Gitlab environment, you will need to first generate the Mobb API Token. 
 
 After logging into the Mobb portal, click on the "settings" icon on the bottom left, then select "Access tokens". 
 From here, you can generate an API key by selecting the "Add API Key" button. 
 
 ![image](/source/images/MobbGenerateAPI.gif "Generate Mobb API Key"){width=60%}
 
-Next, go to your Gitlab repository and select "Settings -> CI/CD -> Variables". From here, we can select "Add Variable". For the variable key, we will call it `MOBB_API_KEY`. For the Value, we will past the value of the token from the previous step. 
+Next, go to your Gitlab repository and select "Settings -> CI/CD -> Variables". From here, we can select "Add Variable". For the variable key, we will call it `MOBB_API_KEY`. For the Value, we will paste the value of the Mobb token generated from the previous step. 
 
 ![image](/source/images/Mobb_SaveVariableGitlab.gif "Gitlab Add Variable"){width=60%}
 
@@ -29,8 +29,8 @@ Next, go to your Gitlab repository and select "Settings -> CI/CD -> Variables". 
 
 Let's now configure the Gitlab Pipeline. You can use the following sample YAML script, or customize it to your liking. 
 
-If you decide to this this exact YAML script, please ensure your Checkmarx related variables are well defined. Namely, 
-`CX_BASE_AUTH_URI`, `CX_API_KEY`, `CX_BASE_URI`, `CX_TENANT`. You can find the value to these variables by following this [guide](https://checkmarx.com/resource/documents/en/34965-118315-authentication-for-checkmarx-one-cli.html) on Checkmarx documentation page. 
+If you decide to use this exact YAML script, please ensure your Checkmarx related variables are well defined. Namely, 
+`CX_BASE_AUTH_URI`, `CX_API_KEY`, `CX_BASE_URI`, `CX_TENANT`. You can find the value to these variables by following this [guide](https://checkmarx.com/resource/documents/en/34965-118315-authentication-for-checkmarx-one-cli.html) from Checkmarx documentation. 
 
 ```yaml
 # This example utilizes Mobb with Checkmarx via GitLab CI/CD pipelines
@@ -71,12 +71,14 @@ mobb-autofixer-job:
     - npx mobbdev@latest analyze -f cx_result.json -r $CI_PROJECT_URL --ref $CI_COMMIT_REF_NAME --api-key $MOBB_API_KEY
   when: on_failure # Run Mobb only if there's a finding to fix
 ```
-## Running the Scan and Mob Analysis
+## Feeding SAST Scan results to Mobb for Analysis
 
 This sample pipeline is configured to run on every merge_request events, or it can also be triggered manually by the user. 
 For simplicity, we will trigger this pipeline manually. To do so, go to Pipeline -> Run Pipline.
 
 ![Run Pipeline](/source/images/MobbPipeline_RunPipeline.png "Run Pipeline"){width=60%}
+
+This will trigger the pipeline to run the Checkmarx SAST scan. After the scan is complete, the results will automatically feed into Mobb for analysis on autofix options. 
 
 ## View Mobb Analysis for auto-fix options
 
@@ -92,7 +94,9 @@ Once we arrive at the analysis page for the project, we can see a list of availa
 
 ![Mobb - Project Page](/source/images/Mobb_ProjectPage.png "Mobb - Project Page"){width=60%}
 
-Mobb provides a powerful self-guided remediation process. As a developer, all you have to do is answer a few questions and validate the fix. From there, Mobb will take over the remediation process and commit the code on your behalf. Once you're ready, select the "Commit Changes" button. 
+Mobb provides a powerful self-guided remediation engine. As a developer, all you have to do is answer a few questions and validate the fix that Mobb is proposing. From there, Mobb will take over the remediation process and commit the code on your behalf. 
+
+Once you're ready, select the "Commit Changes" button. 
 
 ![Mobb - Commit Fix](/source/images/Mobbmmit_CommitFix.png "Mobb - Commit Fix"){width=60%}
 
@@ -100,3 +104,4 @@ Last the last step, enter the name of the target branch where this merge request
 
 ![Mobb - Commit Changes](/source/images/Mobbmmit_CommitChanges.png "Mobb - Commit Changes"){width=60%}
 
+Mobb has successfully committed the remediated code back to your repository under a new branch along with a new merge request. Since this pipeline is configured to run on every merge_request events, a new SAST scan will be conducted to validate the proposed changes to ensure the vulnerabilities have been remediated.
