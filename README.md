@@ -20,6 +20,9 @@ After logging into the Mobb portal, click on the "settings" icon on the bottom l
 From here, you can generate an API key by selecting the "Add API Key" button. 
 
 ![image](/source/images/MobbGenerateAPI.gif "Generate Mobb API Key"){:width="700px"}
+<img src="/source/images/MobbGenerateAPI.gif" width=50% height=50%>
+
+
 
 Next, go to your Gitlab repository and select "Settings -> CI/CD -> Variables". From here, we can select "Add Variable". For the variable key, we will call it `MOBB_API_KEY`. For the Value, we will paste the value of the Mobb token generated from the previous step. 
 
