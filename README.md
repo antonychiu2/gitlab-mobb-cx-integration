@@ -1,12 +1,12 @@
 # Sample Integration of Mobb with Checkmarx SAST scan in Gitlab Pipelines
 
-This is a sample integration that demonstrates the ease of use of the Mobb CLI (Bugsy) in a CI/CD environment. By adding a single CLI command, you can introduce Mobb's autofix capability to any SAST pipelines to expedite the remediation of your security findings. In this  example, we will showcase how to add a Mobb Pipeline Stage to an existing Gitlab pipeline where a Checkmarx scan is configured to during during merge requests
+This is a sample integration that demonstrates the ease of use of the Mobb CLI (Bugsy) in a CI/CD environment. By adding a single CLI command, you can introduce Mobb's autofix capability to any SAST pipelines to expedite the remediation of your security findings. In this  example, we will showcase how to add a Mobb Pipeline Stage to an existing Gitlab pipeline where a Checkmarx scan is configured to run against the branch during merge requests. 
 
 # Usage
 
 ## Register
 
-You will need the following to perform this integration:
+To perform this integration, you will need the following: 
 
 - Sign up for a free account at https://mobb.ai
 - An existing Checkmarx (CxOne) subscription
@@ -74,7 +74,7 @@ mobb-autofixer-job:
 ## Running the Scan and Mob Analysis
 
 This sample pipeline is configured to run on every merge_request events, or it can also be triggered manually by the user. 
-To trigger this pipeline manually, go to Pipeline -> Run Pipline.
+For simplicity, we will trigger this pipeline manually. To do so, go to Pipeline -> Run Pipline.
 
 ![Run Pipeline](/source/images/MobbPipeline_RunPipeline.png "Run Pipeline"){width=60%}
 
