@@ -19,8 +19,7 @@ To setup this integration in your own Gitlab environment, you will need to first
 After logging into the Mobb portal, click on the "settings" icon on the bottom left, then select "Access tokens". 
 From here, you can generate an API key by selecting the "Add API Key" button. 
 
-![image](/source/images/MobbGenerateAPI.gif "Generate Mobb API Key"){:width="700px"}
-<img src="/source/images/MobbGenerateAPI.gif" width=50% height=50%>
+<img src="/source/images/MobbGenerateAPI.gif" width=70% height=70%>
 
 
 
