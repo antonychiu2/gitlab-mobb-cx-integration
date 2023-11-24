@@ -19,7 +19,7 @@ To setup this integration in your own Gitlab environment, you will need to first
 After logging into the Mobb portal, click on the "settings" icon on the bottom left, then select "Access tokens". 
 From here, you can generate an API key by selecting the "Add API Key" button. 
 
-<img src="/source/images/MobbGenerateAPI.gif" width=70% height=70%>
+<img src="/source/images/Mobb_Generate_API.gif" width=70% height=70%>
 
 
 Next, go to your Gitlab repository and select "Settings -> CI/CD -> Variables". From here, we can select "Add Variable". For the variable key, we will call it `MOBB_API_KEY`. For the Value, we will paste the value of the Mobb token generated from the previous step. 
@@ -107,3 +107,7 @@ As the last step, enter the name of the target branch where this merge request w
 <img src="/source/images/Mobbmmit_CommitChanges.png" width=50% height=50%>
 
 Mobb has successfully committed the remediated code back to your repository under a new branch along with a new merge request. Since this pipeline is configured to run on every merge_request events, a new SAST scan will be conducted to validate the proposed changes to ensure the vulnerabilities have been remediated.
+
+<img src="/source/images/Mobb_FinalMerge.png" width=70% height=70%>
+
+The Checkmarx SAST scan passes with no high severity issues found. We will proceed to complete the merge!
